@@ -11,9 +11,6 @@ const routes = (app) => {
   app.use(apiRoute("category"), categoryRouters);
   app.use(apiRoute("diffculty"), difficultyRouters);
   app.use(apiRoute("set-quiz"), setQuizRouters);
-  app.use("/", (req, res) => {
-    res.send("Hello World");
-  });
 };
 
 module.exports = routes;
