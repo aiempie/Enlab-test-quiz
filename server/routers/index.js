@@ -6,6 +6,9 @@ const setQuizRouters = require("./setQuiz/setQuizRouter");
 
 const routes = (app) => {
   const apiRoute = (routeName) => `/api/v1/${routeName}`;
+  app.use("/", (req, res) => {
+    res.send("Hello World");
+  });
   app.use(apiRoute("auth"), authRouters);
   app.use(apiRoute("question"), questionRouters);
   app.use(apiRoute("category"), categoryRouters);
