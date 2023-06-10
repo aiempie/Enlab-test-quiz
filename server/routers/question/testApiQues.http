@@ -1,0 +1,34 @@
+GET http://localhost:5005/api/v1/question?category_id=null
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgyNTkyZGRjMDYyODA4NzVhM2M1NWQiLCJ1c2VybmFtZSI6IlVTRVIxIiwiaWF0IjoxNjg2MzIyOTY2LCJleHAiOjE2ODY5Mjc3NjZ9.rhlhUeRbl-zCzTV075-BhgP4LyrfLIMWKCBnvSsUemM
+
+###
+POST http://localhost:5005/api/v1/question/add-question
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgyNjBhYzI0NjJjNGJlNzI0Njc5MGMiLCJ1c2VybmFtZSI6IkFETUlOIiwiaWF0IjoxNjg2MzIzMTk0LCJleHAiOjE2ODY5Mjc5OTR9.SWIvFiN_W3z-7rf41MqZGEjlgWZUDrW3pnyghuBO1F0
+
+{
+   "question": "Eona là chiến binh thuộc bộ tộc nào?",
+"correctAnswer": "Rakkor",
+"incorrectAnswers": ["Reina", "Rognar", "Revina"],
+    "category_id": "648340a9de77bae31d55e48d",
+    "difficulty_id": "6483485a7c537507d07682c4"
+
+}
+###
+POST http://localhost:5005/api/v1/question/get-question-by-set-quiz
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgyNjBhYzI0NjJjNGJlNzI0Njc5MGMiLCJ1c2VybmFtZSI6IkFETUlOIiwiaWF0IjoxNjg2MzIzMTk0LCJleHAiOjE2ODY5Mjc5OTR9.SWIvFiN_W3z-7rf41MqZGEjlgWZUDrW3pnyghuBO1F0
+
+{
+   "answers": [
+    {
+      "_id": "6483d2d14e4d183b8e053ddd",
+      "answer": "Hội Kinkou"
+    },
+    {
+      "_id": "6483d5524e4d183b8e053e04",
+      "answer": "Rognar"
+    }
+  ]
+}

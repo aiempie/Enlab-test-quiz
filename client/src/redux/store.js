@@ -1,12 +1,44 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import authSlice from "./slice/authSlice";
 import questionsSlice from "./slice/questionsSlice";
+import categorySlice from "./slice/categorySlice";
+import difficultySlice from "./slice/difficultySlice";
+import setQuizSlice from "./slice/setQuizSlice";
+
+const persistConfig = {
+  key: "root",
+  version: 1,
+  storage,
+};
+
+const rootReducer = combineReducers({
+  auth: authSlice,
+  questions: questionsSlice,
+  categories: categorySlice,
+  difficulty: difficultySlice,
+  setQuiz: setQuizSlice,
+});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    auth: authSlice,
-    questions: questionsSlice,
-  },
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
-export default store;
+export let persistor = persistStore(store);

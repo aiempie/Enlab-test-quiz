@@ -19,6 +19,7 @@ const verifyToken = (req, res, next) => {
       .then((data) => {
         if (data) {
           req.user = data;
+          req.token = token;
           next();
         } else {
           return res.status(400).json({

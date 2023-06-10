@@ -2,7 +2,7 @@ const { response } = require("express");
 
 const loadUser = async (req, res = response) => {
   try {
-    res.json({ success: true, user: req.user });
+    res.json({ success: true, user: req.user, accessToken: req.token });
   } catch (error) {
     console.log(error);
     res.status(500).json({

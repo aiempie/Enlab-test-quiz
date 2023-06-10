@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loginFailed } from "../../redux/slice/authSlice";
+import { loadUser } from "../../api/auth";
+import { setCurrentSetQuizFailed } from "../../redux/slice/setQuizSlice";
 
 const NavBar = () => {
   const user = useSelector((state) => {
     return state.auth.login.currentUser;
   });
 
+  useEffect(() => {
+    if (localStorage["accessToken"]) {
+      loadUser(dispath);
+    }
+  }, []);
+
   const dispath = useDispatch();
   const handLogout = () => {
     dispath(loginFailed());
+    dispath(setCurrentSetQuizFailed());
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-75 py-3">
-      <nav className="container mx-auto flex items-center justify-between">
+    <header className="fixed top-0 left-0 w-full bg-gray-500 bg-opacity-75 py-3 z-10">
+      <nav className=" mx-auto flex items-center justify-between ml-4 mr-4">
         <a href="/" className="text-white text-xl font-semibold">
           Let Quizz
         </a>
@@ -23,7 +32,7 @@ const NavBar = () => {
           {user ? (
             <>
               <span className="text-yellow-500 cursor-pointer hover:text-yellow-700">History</span>
-              <span className="text-green-500">Hi, {user.username} !</span>
+              <span className="text-green-500">Hi, {user.user.username} !</span>
               <span className="text-red-500 cursor-pointer hover:text-red-700" onClick={handLogout}>
                 Logout!
               </span>

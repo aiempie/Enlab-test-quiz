@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import setAuthToken from "../../helper/setAuthToken";
 
 const authSlice = createSlice({
   name: "auth",
@@ -17,12 +18,16 @@ const authSlice = createSlice({
     loginSuccess: (state, action) => {
       state.login.isFetching = false;
       state.login.currentUser = action.payload;
+      localStorage.setItem("accessToken", action.payload.accessToken);
+      setAuthToken(localStorage["accessToken"]);
       state.login.error = false;
     },
     loginFailed: (state) => {
       state.login.isFetching = false;
       state.login.currentUser = null;
       state.login.error = true;
+      localStorage.removeItem("accessToken");
+      setAuthToken(null);
     },
     registerStart: (state) => {
       state.register.isFetching = true;
